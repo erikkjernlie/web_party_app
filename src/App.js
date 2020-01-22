@@ -10,6 +10,13 @@ import RegisterProfileScreen from "./components/RegisterProfile";
 import JoinPartyScreen from "./components/JoinPartyScreen";
 import Party from "./components/Party";
 import Navbar from "./components/Navbar";
+import Beer from "./components/SmallBeer";
+import Wine from "./components/Wine";
+import Spirits from "./components/Spirits";
+import Promille from "./components/Promille";
+import SmallBeer from "./components/SmallBeer";
+import LargeBeer from "./components/LargeBeer";
+import ScoreBoard from "./components/ScoreBoard";
 
 export default function App() {
   const [font, setFont] = useState(false);
@@ -43,6 +50,27 @@ export default function App() {
             path="/joinparty"
             render={props => <JoinPartyScreen {...props} />}
           />
+          <Route
+            path="/:id/scoreboard"
+            render={props => <ScoreBoard {...props} />}
+          />
+          <Route
+            path="/:id/alc"
+            render={props => (
+              <div>
+                <SmallBeer {...props} />
+                <div style={{ marginTop: "40px" }}></div>
+                <LargeBeer {...props} />
+                <div style={{ marginTop: "40px" }}></div>
+                <Wine {...props} />
+                <div style={{ marginTop: "40px" }}></div>
+                <Spirits {...props} />
+                <div style={{ marginTop: "40px" }}></div>
+                <Promille {...props} />
+              </div>
+            )}
+          />
+
           <Route path="/:id" render={props => <Party {...props} />} />
         </Switch>
       </Router>

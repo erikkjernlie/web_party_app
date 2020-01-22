@@ -1,6 +1,6 @@
 import React from "react";
 import TextBroker from "./TextBroker";
-
+import "./index.css";
 const ButtonBroker = ({
   children,
   backgroundColor,
@@ -11,7 +11,7 @@ const ButtonBroker = ({
   loadingColor = "white"
 }) => {
   return (
-    <div onClick={onPress}>
+    <button onClick={onPress}>
       {loading ? (
         <div>Loading</div>
       ) : (
@@ -19,7 +19,7 @@ const ButtonBroker = ({
           {children}
         </TextBroker>
       )}
-    </div>
+    </button>
   );
 };
 
