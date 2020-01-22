@@ -94,14 +94,14 @@ const RegisterProfileScreen = props => {
         <ButtonBroker
           backgroundColor="#1BAC8D"
           color="white"
-          onPress={handleSubmit}
+          onClick={handleSubmit}
           loading={creating}
         >
           Ferdig
         </ButtonBroker>
 
         <ButtonBroker
-          onPress={handleAbort}
+          onClick={handleAbort}
           loading={aborting}
           color="grey"
           loadingColor="grey"

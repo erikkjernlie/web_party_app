@@ -1,30 +1,34 @@
 import { useState, useEffect, useContext } from "react";
-import firebase, { firestore } from "../config/firebase";
-import { endProfileRegistration } from "../services/RegisterService";
+import firebase, { firestore } from "src/config/firebase";
 import { errorFromErrorCode } from "../services/ErrorService";
 import UserContext from "../context/UserContext";
+import history from "src/history";
 
-export const useRegister = history => {
+export const useRegister = () => {
   const [registering, setRegistering] = useState(false);
   const [error, setError] = useState(null);
 
-  // const { history } = useContext(UserContext);
+  const [successfulRegister, setSuccessfulRegister] = useState(false);
 
   const withEmailAndPassword = async (email, password) => {
     setRegistering(true);
+    setError(null);
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
-      // navigate
-      window.location.href = `${window.location.origin}/register`;
+      setSuccessfulRegister(true);
+      setError(null);
     } catch (error) {
       console.log(error);
       setError(errorFromErrorCode(error.code));
+      setRegistering(false);
+    } finally {
       setRegistering(false);
     }
   };
 
   return {
     registering,
+    successfulRegister,
     error,
     withEmailAndPassword
   };
@@ -61,9 +65,11 @@ export const useSignOut = () => {
     setSigningOut(true);
     try {
       await firebase.auth().signOut();
-      // navigate
+      history.push("/");
     } catch (error) {
       setError(error);
+      setSigningOut(false);
+    } finally {
       setSigningOut(false);
     }
   };
@@ -101,7 +107,7 @@ export const useUser = () => {
 //TODO: Create independent and generic delete functions.
 //TODO: Use errorFromErrorCode to get norwegian errors
 export const useAbort = () => {
-  const [error, setError] = useState(null);
+  const [abortError, setError] = useState(null);
   const [aborting, setAborting] = useState(false);
 
   const abort = async user => {
@@ -121,9 +127,9 @@ export const useAbort = () => {
         try {
           console.log("DELETING USER: ", user.email);
           await user.delete();
-          await endProfileRegistration();
           setAborting(false);
           // navigate user
+          window.location.reload();
         } catch (error) {
           console.log(error);
           setError(error.toString());
@@ -133,5 +139,5 @@ export const useAbort = () => {
     }
   };
 
-  return { abort, aborting, error };
+  return { abort, aborting, abortError };
 };

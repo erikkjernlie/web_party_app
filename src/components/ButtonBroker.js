@@ -6,19 +6,17 @@ const ButtonBroker = ({
   backgroundColor,
   color,
   style,
-  onPress,
+  onClick,
   loading,
+  disabled,
   loadingColor = "white"
 }) => {
+  if (loading) {
+    return <div>Loading</div>;
+  }
   return (
-    <button onClick={onPress}>
-      {loading ? (
-        <div>Loading</div>
-      ) : (
-        <TextBroker large color={color} bold>
-          {children}
-        </TextBroker>
-      )}
+    <button onClick={onClick} disabled={disabled}>
+      {children}
     </button>
   );
 };

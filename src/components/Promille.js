@@ -52,7 +52,7 @@ const Promille = () => {
           <div>{promille > 0 ? promille : 0}</div>
         </div>
       )}
-      <ButtonBroker onPress={() => saveToScoreBoard()}>
+      <ButtonBroker onClick={() => saveToScoreBoard()}>
         Save to scoreboard
       </ButtonBroker>
     </div>

@@ -53,7 +53,7 @@ const SignInScreen = () => {
         )}
 
         <ButtonBroker
-          onPress={handleSubmit}
+          onClick={handleSubmit}
           backgroundColor="#1BAC8D"
           color="white"
           loading={signIn.signingIn}
@@ -64,7 +64,7 @@ const SignInScreen = () => {
 
         <TouchableOpacity
           style={{ marginTop: 15 }}
-          onPress={() => console.log("register")}
+          onClick={() => console.log("register")}
         >
           <TextBroker large center>
             Jeg har ikke en bruker?

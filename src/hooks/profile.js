@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { firestore } from "../config/firebase";
-import { endProfileRegistration } from "../services/RegisterService";
+import { firestore } from "src/config/firebase";
+import history from "src/history";
 //import { errorFromErrorCode } from '@/services/ErrorService';
 
 //TODO: Use errorFromErrorCode to get norwegian errors
@@ -67,8 +67,8 @@ export const useGetProfile = user => {
 };
 
 //TODO: Use errorFromErrorCode to get norwegian errors
-export const useCreateProfile = history => {
-  const [error, setError] = useState(null);
+export const useCreateProfile = () => {
+  const [createProfileError, setError] = useState(null);
   const [creating, setCreating] = useState(false);
 
   const create = async profile => {
@@ -80,13 +80,8 @@ export const useCreateProfile = history => {
         .collection("profiles")
         .doc(email)
         .set(profileInfo);
-      await endProfileRegistration();
       setCreating(false);
-      //Bad practice, this is not generic when creating profile always will navigate to app when finished...
-      //It's okey for now, because there are no use cases where the redirect isn't neccesary
-
-      // navigate
-      // history.push("")
+      history.push("/");
     } catch (error) {
       console.log(error);
       setError(error.toString());
@@ -94,7 +89,7 @@ export const useCreateProfile = history => {
     }
   };
 
-  return { create, creating, error };
+  return { create, creating, createProfileError };
 };
 
 //TODO: Use errorFromErrorCode to get norwegian errors

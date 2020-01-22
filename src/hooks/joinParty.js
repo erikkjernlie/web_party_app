@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { firestore } from "../config/firebase";
 import useAlcoholStore from "../store";
 import shallow from "zustand/shallow";
+import history from "../history";
 
 export const useJoiningParty = () => {
   const [joiningParty, setJoiningParty] = useState(false);
@@ -21,7 +22,7 @@ export const useJoiningParty = () => {
       if (party.exists) {
         storeData("currentParty", partyName);
         storeData("drinkingHours", new Date());
-        window.location.href = `${window.location.origin}/${partyName}`;
+        history.push("/party-questions");
       } else {
         setError("do not exists");
       }

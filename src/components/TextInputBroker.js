@@ -1,29 +1,24 @@
 import React from "react";
 import TextBroker from "./TextBroker";
-
+import "./index.css";
 const TextInputBroker = ({
   icon,
   label,
   placeholder,
   style,
-  onChangeText,
+  onChange,
   value,
   password,
-  keyboardType,
+  type,
   ...rest
 }) => {
   return (
-    <div>
-      <TextBroker>{label}</TextBroker>
-      <div>
-        <div>ICON</div>
-        <input
-          onChange={onChangeText}
-          value={value}
-          placeholder={placeholder}
-        />
-      </div>
-    </div>
+    <input
+      onChange={onChange}
+      type={type}
+      placeholder={placeholder}
+      value={value}
+    />
   );
 };
 export default TextInputBroker;

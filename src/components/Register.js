@@ -47,7 +47,7 @@ const RegisterScreen = props => {
           </TextBroker>
         )}
         <ButtonBroker
-          onPress={handleSubmit}
+          onClick={handleSubmit}
           backgroundColor="#1BAC8D"
           color="white"
           loading={register.registering}
@@ -55,7 +55,7 @@ const RegisterScreen = props => {
           Neste
         </ButtonBroker>
         <ButtonBroker
-          onPress={signOut}
+          onClick={signOut}
           backgroundColor="#1BAC8D"
           color="white"
           loading={signingOut}

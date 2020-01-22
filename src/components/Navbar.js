@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import Button from "src/Components/Button/Button";
 import history from "src/history";
-import { useSignOut } from "src/hooks/auth/auth";
+import { useSignOut } from "src/hooks/auth";
+import ButtonBroker from "./ButtonBroker";
 
 const Navbar = props => {
   const { user, loading, profile } = props;

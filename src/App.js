@@ -17,33 +17,43 @@ import Promille from "./components/Promille";
 import SmallBeer from "./components/SmallBeer";
 import LargeBeer from "./components/LargeBeer";
 import ScoreBoard from "./components/ScoreBoard";
-
+import RegisterUserRoute from "./Routes/UserRoute/RegisterUserRoute";
+import SignInUserRoute from "./Routes/UserRoute/SignInUserRoute";
+import LandingPageRoute from "./Routes/LandingPageRoute/LandingPageRoute";
+import history from "./history";
+import PartyQuestions from "./components/PartyQuestions";
 export default function App() {
   const [font, setFont] = useState(false);
 
   const [startTime, newStartTime] = useState(new Date().toString());
 
-  const history = createBrowserHistory({
-    basename: ""
-  });
-
   const { user, loading } = useUser();
   const { profile } = useSubscribeProfile(user ? user.email : null);
   console.log("USER", user);
   return (
-    <UserProvider value={{ user, profile, history }}>
+    <UserProvider value={{ user, profile, loading }}>
       <Router history={history}>
-        <Navbar loading={loading} user={user} />
+        <Navbar loading={loading} user={user} profile={profile} />
         <Switch>
           <Route
             exact
             path="/"
-            render={props => <RegisterScreen {...props} />}
+            render={props => <LandingPageRoute {...props} />}
           />
           <Route
             exact
             path="/register"
-            render={props => <RegisterProfileScreen {...props} />}
+            render={props => <RegisterUserRoute {...props} />}
+          />
+          <Route
+            exact
+            path="/signin"
+            render={props => <SignInUserRoute {...props} />}
+          />
+          <Route
+            exact
+            path="/party-questions"
+            render={props => <PartyQuestions {...props} />}
           />
           <Route
             exact
@@ -55,7 +65,7 @@ export default function App() {
             render={props => <ScoreBoard {...props} />}
           />
           <Route
-            path="/:id/alc"
+            path="/:id/drink"
             render={props => (
               <div>
                 <SmallBeer {...props} />
