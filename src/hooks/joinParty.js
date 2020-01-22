@@ -1,6 +1,6 @@
 import { storeData, getData } from "../services/StorageService";
 import { useState, useEffect } from "react";
-import { firestore } from "../config/firebase";
+import { firestore, fire } from "../config/firebase";
 import useAlcoholStore from "../store";
 import shallow from "zustand/shallow";
 import history from "../history";
@@ -141,8 +141,41 @@ export const save = (
       })
       .then(() => {
         console.log("done");
+        history.push("/scoreboard");
       });
   } catch (error) {
     console.log("does not exists");
   }
+};
+
+export const joinPartyAfterQuestions = (
+  username,
+  email,
+  drinking,
+  attendingScoreBoard
+) => {
+  var batch = firestore.batch();
+  var party = localStorage.getItem("currentParty");
+  var ref1 = firestore.collection("parties").doc(party);
+  var ref2 = firestore.collection("profiles").doc(email);
+  batch.update(ref1, {
+    users: fire.FieldValue.arrayUnion(username)
+  });
+  if (drinking) {
+    batch.update(ref1, {
+      usersDrinkingAlcohol: fire.FieldValue.arrayUnion(username)
+    });
+  }
+  if (attendingScoreBoard) {
+    batch.update(ref1, {
+      usersAttendingScoreBoard: fire.FieldValue.arrayUnion(username)
+    });
+  }
+  batch.update(ref2, {
+    parties: fire.FieldValue.arrayUnion(party)
+  });
+
+  batch.commit().then(() => {
+    history.push(party);
+  });
 };

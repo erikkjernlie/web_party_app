@@ -61,11 +61,11 @@ export default function App() {
             render={props => <JoinPartyScreen {...props} />}
           />
           <Route
-            path="/:id/scoreboard"
+            path="/scoreboard"
             render={props => <ScoreBoard {...props} />}
           />
           <Route
-            path="/:id/drink"
+            path="/drink"
             render={props => (
               <div>
                 <SmallBeer {...props} />

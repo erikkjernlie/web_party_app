@@ -14,8 +14,15 @@ const Navbar = props => {
 
   return (
     <div className="Navbar">
-      <div>Digital Twin Cloud Platform</div>
+      <div>My party</div>
       {loading && <div>Loading user</div>}
+      {localStorage.getItem("currentParty") && user && (
+        <ButtonBroker
+          onClick={() => history.replace(localStorage.getItem("currentParty"))}
+        >
+          Go to party
+        </ButtonBroker>
+      )}
       {user && !loading && (
         <div className="flex">
           {profile && <div>{profile.userName}</div>}

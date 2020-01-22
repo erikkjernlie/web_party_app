@@ -32,6 +32,11 @@ button:hover {
   height: 40px;
 }
 
+.alc {
+  display: flex;
+  justify-content: space-around;
+}
+
 .flex {
   display: flex;
 }
@@ -46,4 +51,12 @@ input {
   padding: 3px;
   border-radius: 3px;
   letter-spacing: 0.25px;
+}
+
+.center {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

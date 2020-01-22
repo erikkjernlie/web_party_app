@@ -13,13 +13,11 @@ const LargeBeer = () => {
     shallow
   );
   return (
-    <div>
-      <div>
-        <div>Largebeer</div>
-        <div>{largeBeer}</div>
-        <ButtonBroker onClick={increaseLargeBeer}>plus</ButtonBroker>
-        <ButtonBroker onClick={decreaseLargeBeer}>minus</ButtonBroker>
-      </div>
+    <div className="alc">
+      <div>Largebeer</div>
+      <div>{largeBeer}</div>
+      <ButtonBroker onClick={increaseLargeBeer}>plus</ButtonBroker>
+      <ButtonBroker onClick={decreaseLargeBeer}>minus</ButtonBroker>
     </div>
   );
 };

@@ -1,29 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import TextInputBroker from "./TextInputBroker";
 import ButtonBroker from "./ButtonBroker";
-import { useJoiningParty } from "../hooks/joinParty";
+import { useJoiningParty, joinPartyAfterQuestions } from "../hooks/joinParty";
 import { Card, CardWrapper } from "react-swipeable-cards";
 import history from "../history";
+import UserContext from "../context/UserContext";
 
 const PartyQuestions = () => {
-  const [partyName, setPartyName] = useState("");
   const [backgroundColor, setBackgroundColor] = useState("white");
   const { joinParty, joiningParty, error } = useJoiningParty();
 
-  const data = ["Alexandre", "Thomas", "Lucien"];
+  const [drinking, setDrinking] = useState(false);
+  const [attendingScoreBoard, setAttendingScoreBoard] = useState(false);
 
-  const handleSubmit = () => {
-    if (partyName.length > 0) {
-      joinParty(partyName);
-    }
-  };
+  const { user, profile } = useContext(UserContext);
+
   const getEndCard = () => {
     return (
       <div>
         <ButtonBroker
           backgroundColor="#1BAC8D"
           color="white"
-          onClick={() => history.push(localStorage.getItem("currentParty"))}
+          onClick={() =>
+            joinPartyAfterQuestions(
+              profile.userName,
+              user.email,
+              drinking,
+              attendingScoreBoard
+            )
+          }
         >
           Join party
         </ButtonBroker>
@@ -35,8 +40,12 @@ const PartyQuestions = () => {
     console.log("left");
   };
 
-  const onSwipeRight = () => {
-    console.log("right");
+  const onSwipeDrinking = () => {
+    setDrinking(true);
+  };
+
+  const onSwipeAttending = () => {
+    setAttendingScoreBoard(true);
   };
 
   const onDoubleTap = () => {
@@ -56,19 +65,20 @@ const PartyQuestions = () => {
 
   return (
     <div>
+      PS: JA er mot høyre, NEI mot venstre
       <div>
         <CardWrapper addEndCard={() => getEndCard()} style={wrapperStyle}>
           <Card
             style={cardStyle}
             onSwipeLeft={() => onSwipeLeft()}
-            onSwipeRight={() => onSwipeRight()}
+            onSwipeRight={() => onSwipeDrinking()}
             onDoubleTap={() => onDoubleTap()}
           >
             Do you want to drink alcohol during the party?
           </Card>
           <Card
             onSwipeLeft={() => onSwipeLeft()}
-            onSwipeRight={() => onSwipeRight()}
+            onSwipeRight={() => onSwipeAttending()}
             onDoubleTap={() => onDoubleTap()}
           >
             Do you want to attend the scoreboard for drinking a lot?

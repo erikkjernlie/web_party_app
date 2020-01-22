@@ -10,7 +10,7 @@ export default function LandingPageRoute() {
 
   return (
     <div>
-      <div>Welcome to the cloud based dig twin platform</div>
+      <div>Welcome to the party</div>
       {loading && <div>Loading</div>}
       {!user && !loading && (
         <div className="flex">

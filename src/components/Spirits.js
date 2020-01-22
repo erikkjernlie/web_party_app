@@ -13,13 +13,11 @@ const Spirits = () => {
     shallow
   );
   return (
-    <div>
-      <div>
-        <div>spirits</div>
-        <div>{spirits}</div>
-        <ButtonBroker onClick={increaseSpirits}>plus</ButtonBroker>
-        <ButtonBroker onClick={decreaseSpirits}>minus</ButtonBroker>
-      </div>
+    <div className="alc">
+      <div>spirits</div>
+      <div>{spirits}</div>
+      <ButtonBroker onClick={increaseSpirits}>plus</ButtonBroker>
+      <ButtonBroker onClick={decreaseSpirits}>minus</ButtonBroker>
     </div>
   );
 };
