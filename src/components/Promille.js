@@ -36,7 +36,7 @@ const Promille = () => {
   const spiritsGram = spirits * 13;
   const totalGram = largeBeerGram + smallBeerGram + wineGram + spiritsGram;
   const promille =
-    profile && profile.gender
+    profile && profile.gender && Number(profile.weight) !== 0
       ? profile.gender === "male"
         ? totalGram / (profile.weight * 0.7) -
           0.15 * numbersOfHoursSinceDrinking
