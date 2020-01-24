@@ -10,8 +10,6 @@ import * as confetti from "canvas-confetti";
 export default function LandingPageRoute() {
   const { user, loading } = useContext(UserContext);
 
-  useEffect(() => {}, []);
-
   return (
     <div>
       <div className="confetti">
